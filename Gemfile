@@ -26,3 +26,5 @@ group :development, :test do
   gem "brakeman", "7.0.0", require: false
 end
 
+
+gem "syntax_tree"
