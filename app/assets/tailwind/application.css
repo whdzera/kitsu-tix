@@ -6,3 +6,7 @@
   background-color: #ff0000ce !important;
   height: 4px !important;
 }
+
+.clickable {
+  cursor: pointer;
+}

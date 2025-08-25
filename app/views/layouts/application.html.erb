@@ -19,21 +19,36 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16 items-center">
           <!-- Logo -->
-          <a class="flex items-center space-x-2" href="<%= root_path %>">
-            <h1 class="text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent">KitsuTix</h1>
-          </a>
+          <%= link_to root_path, 
+            class: "flex items-center space-x-2 transition-transform duration-200 hover:scale-105",
+            data: { 
+              turbo_action: "advance",
+              turbo_frame: "_top" 
+            } do %>
+            <h1 class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
+              KitsuTix
+            </h1>
+          <% end %>
           <!-- Mobile Menu Button -->
           <div class="lg:hidden flex items-center">
             <!-- Theme Toggle (Mobile) -->
             <div data-controller="theme" class="mr-2">
               <button data-action="click->theme#toggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition">
-                <!-- Sun Icon -->
-                <svg class="h-5 w-5" data-theme-target="icon" data-light viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zM4 11a1 1 0 100-2H3a1 1 0 000 2h1zm13 0a1 1 0 100-2h-1a1 1 0 000 2h1zM10 17a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zm8.486 8.486l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 10-1.414 1.414z" />
+                <!-- Sun Icon (Light Mode) -->
+                <svg class="h-5 w-5" data-theme-target="icon" data-light viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="12" cy="12" r="5"/>
+                  <line x1="12" y1="1" x2="12" y2="3"/>
+                  <line x1="12" y1="21" x2="12" y2="23"/>
+                  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                  <line x1="1" y1="12" x2="3" y2="12"/>
+                  <line x1="21" y1="12" x2="23" y2="12"/>
+                  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                  <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
                 </svg>
-                <!-- Moon Icon -->
-                <svg class="h-5 w-5 hidden" data-theme-target="icon" data-dark viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                <!-- Moon Icon (Dark Mode) -->
+                <svg class="h-5 w-5 hidden" data-theme-target="icon" data-dark viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
                 </svg>
               </button>
             </div>
@@ -64,14 +79,22 @@
             </div>
             <!-- Theme Toggle (Desktop) -->
             <div data-controller="theme">
-              <button data-action="click->theme#toggle" class="ml-4 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition">
-                <!-- Sun Icon -->
-                <svg class="h-5 w-5" data-theme-target="icon" data-light viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zM4 11a1 1 0 100-2H3a1 1 0 000 2h1zm13 0a1 1 0 100-2h-1a1 1 0 000 2h1zM10 17a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zm8.486 8.486l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 10-1.414 1.414z" />
+              <button data-action="click->theme#toggle" class="clickable ml-4 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                <!-- Sun Icon (Light Mode) -->
+                <svg class="h-5 w-5" data-theme-target="icon" data-light viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="12" cy="12" r="5"/>
+                  <line x1="12" y1="1" x2="12" y2="3"/>
+                  <line x1="12" y1="21" x2="12" y2="23"/>
+                  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                  <line x1="1" y1="12" x2="3" y2="12"/>
+                  <line x1="21" y1="12" x2="23" y2="12"/>
+                  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                  <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
                 </svg>
-                <!-- Moon Icon -->
-                <svg class="h-5 w-5 hidden" data-theme-target="icon" data-dark viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                <!-- Moon Icon (Dark Mode) -->
+                <svg class="h-5 w-5 hidden" data-theme-target="icon" data-dark viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
                 </svg>
               </button>
             </div>
@@ -190,17 +213,26 @@
     <footer class="bg-white dark:bg-gray-800 shadow-inner border-t border-gray-200 dark:border-gray-700">
       <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
         <div class="text-center">
-          <!-- Navigation Links -->
           <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-4 mb-4 text-blue-600 dark:text-blue-400">
-            <a class="hover:underline text-sm sm:text-base" href="<%= terms_conditions_path %>">Terms of Service</a>
+            <%= link_to "Terms of Service", terms_conditions_path, 
+              class: "hover:underline text-sm sm:text-base transition-colors duration-200",
+              data: { turbo_frame: "_top" } %>
             <span class="hidden sm:inline text-gray-400">•</span>
-            <a class="hover:underline text-sm sm:text-base" href="<%= privacy_policy_path %>">Privacy Policy</a>
+            <%= link_to "Privacy Policy", privacy_policy_path, 
+              class: "hover:underline text-sm sm:text-base transition-colors duration-200",
+              data: { turbo_frame: "_top" } %>
             <span class="hidden sm:inline text-gray-400">•</span>
-            <a class="hover:underline text-sm sm:text-base" href="<%= faq_path %>">FAQ</a>
+            <%= link_to "FAQ", faq_path, 
+              class: "hover:underline text-sm sm:text-base transition-colors duration-200",
+              data: { turbo_frame: "_top" } %>
             <span class="hidden sm:inline text-gray-400">•</span>
-            <a class="hover:underline text-sm sm:text-base" href="<%= contact_path %>">Contact</a>
+            <%= link_to "Contact", contact_path, 
+              class: "hover:underline text-sm sm:text-base transition-colors duration-200",
+              data: { turbo_frame: "_top" } %>
             <span class="hidden sm:inline text-gray-400">•</span>
-            <a class="hover:underline text-sm sm:text-base" href="<%= about_path %>">About</a>
+            <%= link_to "About", about_path, 
+              class: "hover:underline text-sm sm:text-base transition-colors duration-200",
+              data: { turbo_frame: "_top" } %>
           </div>
           <!-- Credit Section -->
           <div class="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 text-sm sm:text-base">
