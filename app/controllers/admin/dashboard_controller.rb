@@ -4,6 +4,10 @@ module Admin
     before_action :require_superadmin
 
     def index
+      @user = current_user
+    end
+
+    def user_management
       @users = User.all.order(created_at: :desc)
 
       respond_to do |format|
@@ -37,13 +41,13 @@ module Admin
       # Don't allow admins to edit their own role (security measure)
       if @user == current_user && user_params[:role] != @user.role
         flash[:alert] = "You cannot change your own admin status."
-        redirect_to admin_dashboard_path
+        redirect_to admin_user_management_path
         return
       end
 
       if @user.update(user_params)
         flash[:notice] = "User was successfully updated."
-        redirect_to admin_dashboard_path
+        redirect_to admin_user_management_path
       else
         render :edit_user
       end
@@ -55,13 +59,13 @@ module Admin
       # Don't allow admins to delete themselves
       if @user == current_user
         flash[:alert] = "You cannot delete your own account from here."
-        redirect_to admin_dashboard_path
+        redirect_to admin_user_management_path
         return
       end
 
       @user.destroy
       flash[:notice] = "User was successfully deleted."
-      redirect_to admin_dashboard_path
+      redirect_to admin_user_management_path
     end
 
     private

@@ -101,7 +101,7 @@
             <!-- Auth Links -->
             <% if user_signed_in? %>
               <div class="relative group">
-                <button class="flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                <button class="clickable flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700 transition">
                   <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" />
                   </svg>
@@ -109,78 +109,87 @@
                 </button>
                 <div class="absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 transform scale-95 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition z-10">
                   <% if current_user.user? %>
-                    <a href="<%= member_dashboard_path %>" class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700">Dashboard</a>
+                    <%= link_to "Dashboard", userd_dashboard_path, class: "block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700" %>
+                  <% end %>
+                  <% if current_user.organizer? %>
+                    <%= link_to "Dashboard", organizer_dashboard_path, class: "block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700" %>
                   <% end %>
                   <% if current_user.superadmin? %>
-                    <a href="<%= admin_dashboard_path %>" class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700">Admin Dashboard</a>
+                    <%= link_to "Dashboard", admin_dashboard_path, class: "block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700" %>
+                  <% end %>
+                  <% if current_user.superadmin? %>
+                    <%= link_to "User Management", admin_user_management_path, class: "block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700" %>
                   <% end %>
                   <div class="border-t border-gray-200 dark:border-gray-700 my-1"></div>
-                  <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "w-full text-left px-4 py-2 text-sm text-red-700 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/30" %>
+                  <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "clickable w-full text-left px-4 py-2 text-sm text-red-700 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/30" %>
                 </div>
               </div>
             <% else %>
               <div class="flex items-center space-x-2">
-                <a href="<%= new_user_registration_path %>" class="px-3 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">Sign Up</a>
-                <a href="<%= new_user_session_path %>" class="px-3 py-2 text-sm bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition">Log in</a>
+                <%= link_to "Sign Up", new_user_registration_path, class: "px-3 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition" %>
+                <%= link_to "Log in", new_user_session_path, class: "px-3 py-2 text-sm bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition" %>
               </div>
             <% end %>
           </div>
         </div>
-      </div>
-      <!-- Mobile Menu Container -->
-      <div class="hidden lg:hidden bg-white dark:bg-gray-800 shadow-md border-t border-gray-200 dark:border-gray-700" data-navbar-target="menu">
-        <div class="px-4 pt-2 pb-3 space-y-1">
-          <!-- Mobile menu items -->
-          <a href="#" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-700 transition">Documentation</a>
-          <!-- Mobile Dropdown Menu -->
-          <div class="relative" x-data="{ open: false }">
-            <button @click="open = !open" class="flex justify-between w-full px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-700 transition">
-              <span>More</span>
-              <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
-              </svg>
-            </button>
-            <div x-show="open" class="px-4 py-2 bg-gray-50 dark:bg-gray-700 rounded-md mt-1 mb-2">
-              <a href="#" class="block px-3 py-2 rounded-md text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600">About</a>
-              <a href="#" class="block px-3 py-2 rounded-md text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600">Jobs</a>
-              <div class="border-t border-gray-200 dark:border-gray-600 my-1"></div>
-              <a href="#" class="block px-3 py-2 rounded-md text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600">Report an issue</a>
+        <!-- Mobile Menu Container -->
+        <div class="lg:hidden hidden bg-white dark:bg-gray-800 shadow-md border-t border-gray-200 dark:border-gray-700" data-navbar-target="menu">
+          <div class="px-4 pt-2 pb-3 space-y-1">
+            <!-- Mobile menu items -->
+            <a href="#" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-700 transition">Documentation</a>
+            <!-- Mobile Dropdown Menu -->
+            <div class="relative" x-data="{ open: false }">
+              <button @click="open = !open" class="flex justify-between w-full px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                <span>More</span>
+                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
+                </svg>
+              </button>
+              <div x-show="open" class="px-4 py-2 bg-gray-50 dark:bg-gray-700 rounded-md mt-1 mb-2">
+                <a href="#" class="block px-3 py-2 rounded-md text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600">About</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600">Jobs</a>
+                <div class="border-t border-gray-200 dark:border-gray-600 my-1"></div>
+                <a href="#" class="block px-3 py-2 rounded-md text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600">Report an issue</a>
+              </div>
             </div>
+            <!-- User Profile Section in Mobile -->
+            <% if user_signed_in? %>
+              <div class="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700">
+                <div class="flex items-center px-3">
+                  <div class="flex-shrink-0">
+                    <svg class="h-10 w-10 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <div class="text-base font-medium text-gray-800 dark:text-gray-200"><%= current_user.email %></div>
+                    <div class="text-sm font-medium text-gray-500 dark:text-gray-400"><%= current_user.role %></div>
+                  </div>
+                </div>
+                <div class="mt-3 space-y-1">
+                  <% if current_user.user? %>
+                    <%= link_to "Dashboard", userd_dashboard_path, class: "block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-700 transition" %>
+                  <% end %>
+                  <% if current_user.superadmin? %>
+                    <%= link_to "Dashboard", admin_dashboard_path, class: "block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-700 transition" %>
+                  <% end %>
+                  <% if current_user.superadmin? %>
+                    <%= link_to "User Management", admin_user_management_path, class: "lock px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-700 transition" %>
+                  <% end %>
+                  <div class="px-3 py-2">
+                    <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "w-full text-left px-4 py-2 rounded-md text-base font-medium text-red-700 dark:text-red-400 bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-900/30 transition" %>
+                  </div>
+                </div>
+              </div>
+            <% else %>
+              <div class="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700">
+                <div class="space-y-2">
+                  <%= link_to "Sign Up", new_user_registration_path, class: "block w-full text-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition" %>
+                  <%= link_to "Log in", new_user_session_path, class: "block w-full text-center px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition" %>
+                </div>
+              </div>
+            <% end %>
           </div>
-          <!-- User Profile Section in Mobile -->
-          <% if user_signed_in? %>
-            <div class="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700">
-              <div class="flex items-center px-3">
-                <div class="flex-shrink-0">
-                  <svg class="h-10 w-10 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" />
-                  </svg>
-                </div>
-                <div class="ml-3">
-                  <div class="text-base font-medium text-gray-800 dark:text-gray-200"><%= current_user.email %></div>
-                  <div class="text-sm font-medium text-gray-500 dark:text-gray-400"><%= current_user.role %></div>
-                </div>
-              </div>
-              <div class="mt-3 space-y-1">
-                <% if current_user.user? %>
-                  <a href="<%= member_dashboard_path %>" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-700 transition">Dashboard</a>
-                <% end %>
-                <% if current_user.superadmin? %>
-                  <a href="<%= admin_dashboard_path %>" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-700 transition">Admin Dashboard</a>
-                <% end %>
-                <div class="px-3 py-2">
-                  <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "w-full text-left px-4 py-2 rounded-md text-base font-medium text-red-700 dark:text-red-400 bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-900/30 transition" %>
-                </div>
-              </div>
-            </div>
-          <% else %>
-            <div class="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700">
-              <div class="space-y-2">
-                <a href="<%= new_user_registration_path %>" class="block w-full text-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">Sign Up</a>
-                <a href="<%= new_user_session_path %>" class="block w-full text-center px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition">Log in</a>
-              </div>
-            </div>
-          <% end %>
         </div>
       </div>
     </nav>
@@ -215,24 +224,24 @@
         <div class="text-center">
           <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-4 mb-4 text-blue-600 dark:text-blue-400">
             <%= link_to "Terms of Service", terms_conditions_path, 
-              class: "hover:underline text-sm sm:text-base transition-colors duration-200",
-              data: { turbo_frame: "_top" } %>
+        class: "hover:underline text-sm sm:text-base transition-colors duration-200",
+        data: { turbo_frame: "_top" } %>
             <span class="hidden sm:inline text-gray-400">•</span>
             <%= link_to "Privacy Policy", privacy_policy_path, 
-              class: "hover:underline text-sm sm:text-base transition-colors duration-200",
-              data: { turbo_frame: "_top" } %>
+        class: "hover:underline text-sm sm:text-base transition-colors duration-200",
+        data: { turbo_frame: "_top" } %>
             <span class="hidden sm:inline text-gray-400">•</span>
             <%= link_to "FAQ", faq_path, 
-              class: "hover:underline text-sm sm:text-base transition-colors duration-200",
-              data: { turbo_frame: "_top" } %>
+        class: "hover:underline text-sm sm:text-base transition-colors duration-200",
+        data: { turbo_frame: "_top" } %>
             <span class="hidden sm:inline text-gray-400">•</span>
             <%= link_to "Contact", contact_path, 
-              class: "hover:underline text-sm sm:text-base transition-colors duration-200",
-              data: { turbo_frame: "_top" } %>
+        class: "hover:underline text-sm sm:text-base transition-colors duration-200",
+        data: { turbo_frame: "_top" } %>
             <span class="hidden sm:inline text-gray-400">•</span>
             <%= link_to "About", about_path, 
-              class: "hover:underline text-sm sm:text-base transition-colors duration-200",
-              data: { turbo_frame: "_top" } %>
+        class: "hover:underline text-sm sm:text-base transition-colors duration-200",
+        data: { turbo_frame: "_top" } %>
           </div>
           <!-- Credit Section -->
           <div class="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 text-sm sm:text-base">

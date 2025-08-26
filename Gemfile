@@ -24,6 +24,7 @@ gem "bootsnap", require: false
 group :development, :test do
   gem "debug", "1.9.1", platforms: %i[mri windows], require: "debug/prelude"
   gem "brakeman", "7.0.0", require: false
+  gem "better_errors", "2.10.1"
+  gem "binding_of_caller", "1.0.1"
+  gem "syntax_tree", "6.3.0"
 end
-
-gem "syntax_tree"
