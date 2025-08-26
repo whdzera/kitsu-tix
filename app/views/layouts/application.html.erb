@@ -108,10 +108,10 @@
                   <span><%= current_user.email %></span>
                 </button>
                 <div class="absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 transform scale-95 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition z-10">
-                  <% if current_user.member? %>
+                  <% if current_user.user? %>
                     <a href="<%= member_dashboard_path %>" class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700">Dashboard</a>
                   <% end %>
-                  <% if current_user.admin? %>
+                  <% if current_user.superadmin? %>
                     <a href="<%= admin_dashboard_path %>" class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700">Admin Dashboard</a>
                   <% end %>
                   <div class="border-t border-gray-200 dark:border-gray-700 my-1"></div>
@@ -162,10 +162,10 @@
                 </div>
               </div>
               <div class="mt-3 space-y-1">
-                <% if current_user.member? %>
+                <% if current_user.user? %>
                   <a href="<%= member_dashboard_path %>" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-700 transition">Dashboard</a>
                 <% end %>
-                <% if current_user.admin? %>
+                <% if current_user.superadmin? %>
                   <a href="<%= admin_dashboard_path %>" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-700 transition">Admin Dashboard</a>
                 <% end %>
                 <div class="px-3 py-2">

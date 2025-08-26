@@ -8,10 +8,9 @@ class User < ApplicationRecord
          :confirmable
 
   # Define roles
-  ROLES = %w[member admin].freeze
+  ROLES = %w[superadmin organizer user].freeze
 
   # Validations
-
   validates :email,
             presence: true,
             uniqueness: {
@@ -23,12 +22,16 @@ class User < ApplicationRecord
             }
 
   # Role methods
-  def admin?
-    role == "admin"
+  def superadmin?
+    role == "superadmin"
   end
 
-  def member?
-    role == "member"
+  def organizer?
+    role == "organizer"
+  end
+
+  def user?
+    role == "user"
   end
 
   # Set default role for new users
@@ -37,6 +40,6 @@ class User < ApplicationRecord
   private
 
   def set_default_role
-    self.role ||= "member"
+    self.role ||= "user"
   end
 end

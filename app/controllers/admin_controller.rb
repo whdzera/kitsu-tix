@@ -1,14 +1,14 @@
 class AdminController < ApplicationController
   before_action :authenticate_user!
-  before_action :require_admin
-  
+  before_action :require_superadmin
+
   def dashboard
   end
-  
+
   private
-  
-  def require_admin
-    unless current_user.admin?
+
+  def require_superadmin
+    unless current_user.superadmin?
       flash[:alert] = "You are not authorized to access this area."
       redirect_to root_path
     end
