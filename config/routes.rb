@@ -6,10 +6,8 @@ Rails.application.routes.draw do
                confirmations: "users/confirmations"
              }
 
-  # check username form
-  devise_scope :user do
-    get "users/check_username", to: "users/registrations#check_username"
-  end
+  # Homepage
+  root to: "home#index"
 
   # Static pages
   get "/confirmation_instructions",
@@ -21,10 +19,7 @@ Rails.application.routes.draw do
   get "/contact", to: "static_pages#contact", as: :contact
   get "/about", to: "static_pages#about", as: :about
 
-  # Homepage accessible to everyone
-  root to: "home#index"
-
-  # Admin area with proper namespace
+  # Admin area
   namespace :admin do
     get "dashboard", to: "dashboard#index"
     get "users/:id/edit", to: "dashboard#edit_user", as: "edit_user"

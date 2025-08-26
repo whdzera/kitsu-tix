@@ -105,7 +105,7 @@
                   <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" />
                   </svg>
-                  <span><%= current_user.username %></span>
+                  <span><%= current_user.email %></span>
                 </button>
                 <div class="absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 transform scale-95 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition z-10">
                   <% if current_user.member? %>
@@ -157,7 +157,7 @@
                   </svg>
                 </div>
                 <div class="ml-3">
-                  <div class="text-base font-medium text-gray-800 dark:text-gray-200"><%= current_user.username %></div>
+                  <div class="text-base font-medium text-gray-800 dark:text-gray-200"><%= current_user.email %></div>
                   <div class="text-sm font-medium text-gray-500 dark:text-gray-400"><%= current_user.role %></div>
                 </div>
               </div>
