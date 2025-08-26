@@ -62,25 +62,19 @@ Rails.application.configure do
   # Raise error when a before_action's only/except options reference missing actions.
   config.action_controller.raise_on_missing_callback_actions = true
 
-  # Konfigurasi dasar untuk email
   config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
 
-  # Metode pengiriman email (SMTP untuk pengiriman nyata)
   config.action_mailer.delivery_method = :smtp
 
-  # Konfigurasi SMTP
   config.action_mailer.smtp_settings = {
     user_name: Rails.application.credentials.dig(:smtp, :user_name),
     password: Rails.application.credentials.dig(:smtp, :password),
     address: "sandbox.smtp.mailtrap.io",
-    host: "sandbox.smtp.mailtrap.io",
     port: "2525",
-    authentication: :login
+    authentication: :plain
   }
 
-  # Aktifkan pengiriman email
   config.action_mailer.perform_deliveries = true
 
-  # Tampilkan error jika ada masalah pengiriman
   config.action_mailer.raise_delivery_errors = true
 end
