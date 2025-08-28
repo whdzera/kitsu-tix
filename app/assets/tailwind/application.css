@@ -1,9 +1,9 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 .turbo-progress-bar {
-  background-color: #ff0000ce !important;
+  background-color: #1a3edbce !important;
   height: 4px !important;
 }
 
