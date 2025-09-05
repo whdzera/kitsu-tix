@@ -27,6 +27,8 @@ group :development, :test do
   gem 'binding_of_caller', '1.0.1'
   gem 'brakeman', '7.0.0', require: false
   gem 'debug', '1.9.1', platforms: %i[mri windows], require: 'debug/prelude'
-  gem 'rubocop', '1.80.0'
   gem 'syntax_tree', '6.3.0'
+  gem 'rubocop', '1.80.2', require: false
 end
+
+
